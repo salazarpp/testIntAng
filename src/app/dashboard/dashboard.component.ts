@@ -22,6 +22,7 @@ export class DashboardComponent implements OnInit {
   searchData() {
     this.infoService.getImgData(this.search.value, 5).subscribe(responseData => {
       this.userData.next(responseData.data);
+      this.search.patchValue('');
     });
   }
 
