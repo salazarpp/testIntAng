@@ -1,4 +1,7 @@
+import { InfoService } from './../info.service';
 import { Component, OnInit } from '@angular/core';
+import { FormControl } from '@angular/forms';
+import { BehaviorSubject } from 'rxjs';
 
 @Component({
   selector: 'app-dashboard',
@@ -7,9 +10,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DashboardComponent implements OnInit {
 
-  constructor() { }
+  search = new FormControl('');
+  userData = new BehaviorSubject<any>(null);
+  constructor(
+    private infoService: InfoService
+  ) { }
 
   ngOnInit(): void {
+  }
+
+  searchData() {
+    this.infoService.getImgData(this.search.value, 5).subscribe(responseData => {
+      this.userData.next(responseData.data);
+    });
   }
 
 }

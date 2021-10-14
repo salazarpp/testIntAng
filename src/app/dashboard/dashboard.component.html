@@ -1,1 +1,26 @@
-<p>dashboard works!</p>
+<div class="row header">
+    <div class="col-sm-1"></div>
+    <div class="col-sm-9">
+        <input id="search" placeholder="Search Images" class="form-control" type="text" [formControl]="search" (keydown.enter)="searchData()">
+    </div>
+    <div class="col-sm-1">
+        <button type="button" class="btn btn-primary" (click)="searchData()">
+            <i class="bi bi-arrow-right-square"></i>
+        </button>
+    </div>
+    <div class="col-sm-1"></div>
+</div>
+<div class="row header">
+    <div class="col-sm-1"></div>
+    <div class="col-sm-10">
+        <div class="card" *ngFor="let user of userData | async">
+            <h5 class="card-header">{{user.title}}</h5>
+            <div class="card-body">
+              <p class="card-text">
+                <img src="{{user.images.downsized.url}}" />
+              </p>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-1"></div>
+</div>
